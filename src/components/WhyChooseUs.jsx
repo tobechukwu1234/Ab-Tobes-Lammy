@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Truck, Leaf, ShieldCheck, Award } from 'lucide-react';
 
-const WhyChooseUs = () => {
+function WhyChooseUs() {
   const features = [
     {
       icon: <Truck className="text-orange-600" size={32} />,

@@ -3,7 +3,7 @@ import { ShoppingCart, Plus, Star } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 
-const FoodCard = ({ meal }) => {
+function FoodCard({ meal }) {
   const { addToCart } = useCart();
 
   return (

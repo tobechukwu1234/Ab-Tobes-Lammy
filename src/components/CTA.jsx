@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
-const CTA = () => {
+function CTA() {
   return (
     <section className="py-24 px-4 md:px-6">
       <div className="container mx-auto">

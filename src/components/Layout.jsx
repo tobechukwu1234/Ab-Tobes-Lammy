@@ -3,7 +3,7 @@ import { AnimatePresence } from 'framer-motion';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
-const Layout = () => {
+function Layout() {
   const location = useLocation();
 
   return (

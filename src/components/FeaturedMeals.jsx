@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import FoodCard from './FoodCard';
 import { MEALS } from '../data/meals';
 
-const FeaturedMeals = () => {
+function FeaturedMeals() {
   // Show only first 6 meals on the home page
   const featuredMeals = MEALS.slice(0, 6);
 

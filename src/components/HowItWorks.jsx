@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Utensils, ShoppingBag, CreditCard, Truck } from 'lucide-react';
 
-const HowItWorks = () => {
+function HowItWorks() {
   const steps = [
     {
       icon: <Utensils size={32} />,

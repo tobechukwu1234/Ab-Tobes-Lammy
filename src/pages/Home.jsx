@@ -7,7 +7,7 @@ import HowItWorks from '../components/HowItWorks';
 import Reviews from '../components/Reviews';
 import CTA from '../components/CTA';
 
-const Home = () => {
+function Home() {
   return (
     <motion.div
       initial={{ opacity: 0 }}

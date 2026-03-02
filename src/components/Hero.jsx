@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronRight, UtensilsCrossed } from 'lucide-react';
 import heroImg from '../assets/rice and chicken.jpg';
 
-const Hero = () => {
+function Hero() {
   return (
     <section className="relative h-screen min-h-[700px] flex items-center overflow-hidden">
       {/* Background Image with Overlay */}

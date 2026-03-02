@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Star, Quote } from 'lucide-react';
 import { REVIEWS } from '../data/meals';
 
-const Reviews = () => {
+function Reviews() {
   return (
     <section className="py-24 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-6">

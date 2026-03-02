@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import aboutImg from '../assets/amala.jpg';
 
-const AboutPreview = () => {
+function AboutPreview() {
   return (
     <section className="py-24 bg-orange-50/50">
       <div className="container mx-auto px-4 md:px-6">
