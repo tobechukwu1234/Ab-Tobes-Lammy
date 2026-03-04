@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingCart, Menu as MenuIcon, X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { cartCount } = useCart();
+  const { totalQuantity } = useCart(); // use reactive cart quantity
   const location = useLocation();
 
   useEffect(() => {
@@ -26,50 +26,60 @@ function Navbar() {
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'}`}>
+    <nav
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? 'bg-white/90 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'
+      }`}
+    >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-black tracking-tighter text-orange-600">ABT<span className="text-slate-800">KT</span></span>
+          <span className="text-2xl font-black tracking-tighter text-orange-600">
+            ABT<span className="text-slate-800">KT</span>
+          </span>
         </Link>
 
-        {/* Desktop Links */}
         <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               to={link.path}
-              className={`font-medium transition-colors hover:text-orange-600 ${location.pathname === link.path ? 'text-orange-600' : 'text-slate-700'}`}
+              className={`font-medium transition-colors hover:text-orange-600 ${
+                location.pathname === link.path ? 'text-orange-600' : 'text-slate-700'
+              }`}
             >
               {link.name}
             </Link>
           ))}
-          <Link to="/cart" className="relative p-2 bg-orange-100 text-orange-600 rounded-full hover:bg-orange-600 hover:text-white transition-all duration-300">
+
+          <Link
+            to="/cart"
+            className="relative p-2 bg-orange-100 text-orange-600 rounded-full hover:bg-orange-600 hover:text-white transition-all duration-300"
+          >
             <ShoppingCart size={20} />
-            {cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">
-                {cartCount}
+            {totalQuantity > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white animate-pulse">
+                {totalQuantity}
               </span>
             )}
           </Link>
         </div>
 
-        {/* Mobile Menu Toggle */}
         <div className="md:hidden flex items-center space-x-4">
           <Link to="/cart" className="relative p-2 text-slate-700">
             <ShoppingCart size={24} />
-            {cartCount > 0 && (
-              <span className="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white">
-                {cartCount}
+            {totalQuantity > 0 && (
+              <span className="absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-white animate-pulse">
+                {totalQuantity}
               </span>
             )}
           </Link>
+
           <button onClick={() => setIsOpen(!isOpen)} className="text-slate-700">
             {isOpen ? <X size={28} /> : <MenuIcon size={28} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -84,16 +94,14 @@ function Navbar() {
                   key={link.name}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className={`text-lg font-semibold ${location.pathname === link.path ? 'text-orange-600' : 'text-slate-700'}`}
+                  className={`text-lg font-semibold ${
+                    location.pathname === link.path ? 'text-orange-600' : 'text-slate-700'
+                  }`}
                 >
                   {link.name}
                 </Link>
               ))}
-              <Link
-                to="/menu"
-                onClick={() => setIsOpen(false)}
-                className="btn-primary"
-              >
+              <Link to="/menu" onClick={() => setIsOpen(false)} className="btn-primary">
                 Order Now
               </Link>
             </div>
@@ -102,6 +110,6 @@ function Navbar() {
       </AnimatePresence>
     </nav>
   );
-};
+}
 
 export default Navbar;

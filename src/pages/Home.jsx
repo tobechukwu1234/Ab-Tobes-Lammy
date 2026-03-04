@@ -15,11 +15,11 @@ import { MEALS, REVIEWS } from '../data/meals';
 
 const Hero = () => {
   return (
-    <section className="relative h-screen min-h-[700px] flex items-center overflow-hidden">
+    <section className="relative h-screen min-h-175 flex items-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src={heroImg}
+          src={heroImg}   
           alt="Delicious Rice and Chicken"
           className="w-full h-full object-cover"
         />
@@ -159,7 +159,7 @@ const AboutPreview = () => {
             className="relative"
           >
             <div className="relative z-10 rounded-4xl overflow-hidden shadow-2xl">
-              <img src={aboutImg} alt="Our Kitchen" className="w-full h-[500px] object-cover" />
+              <img src={aboutImg} alt="Our Kitchen" className="w-full h-125 object-cover" />
             </div>
             <div className="absolute -bottom-6 -right-6 w-full h-full bg-orange-200 rounded-4xl -z-10"></div>
             <div className="absolute -top-10 -left-10 w-32 h-32 bg-orange-500/10 rounded-full blur-2xl"></div>
@@ -298,7 +298,7 @@ const HowItWorks = () => {
 
   return (
     <section className="py-24 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-orange-600/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 bg-orange-600/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center mb-16">
@@ -339,7 +339,7 @@ const HowItWorks = () => {
                 {step.icon}
               </div>
               <h4 className="text-xl font-bold text-white mb-4">{step.title}</h4>
-              <p className="text-slate-400 text-sm leading-relaxed max-w-[200px]">{step.description}</p>
+              <p className="text-slate-400 text-sm leading-relaxed max-w-50">{step.description}</p>
             </motion.div>
           ))}
         </div>

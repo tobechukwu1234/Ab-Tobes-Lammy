@@ -9,6 +9,8 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import FoodDetails from './pages/FoodDetails';
 import OrderConfirmation from './pages/OrderConfirmation';
+import OrderSummary from './pages/OrderSummary';
+import AdminDashboard from './pages/AdminDashboard';
 
 function App() {
   return (
@@ -21,7 +23,9 @@ function App() {
         <Route path="cart" element={<Cart />} />
         <Route path="checkout" element={<Checkout />} />
         <Route path="food/:id" element={<FoodDetails />} />
-        <Route path="order-confirmation" element={<OrderConfirmation />} />
+        <Route path="order-confirmation/:id" element={<OrderConfirmation />} />
+        <Route path="order-summary/:id" element={<OrderSummary />} />
+        <Route path="admin" element={<AdminDashboard />} />
       </Route>
     </Routes>
   );

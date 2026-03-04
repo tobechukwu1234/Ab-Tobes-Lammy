@@ -1,70 +1,40 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from "react";
 
 const CartContext = createContext();
 
-export const useCart = () => {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error('useCart must be used within a CartProvider');
-  }
-  return context;
-};
-
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState(() => {
-    const savedCart = localStorage.getItem('abt-kitchen-cart');
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+  const [cartItems, setCartItems] = useState([]);
 
-  useEffect(() => {
-    localStorage.setItem('abt-kitchen-cart', JSON.stringify(cart));
-  }, [cart]);
-
-  const addToCart = (item, quantity = 1) => {
-    setCart((prevCart) => {
-      const existingItem = prevCart.find((i) => i.id === item.id);
-      if (existingItem) {
-        return prevCart.map((i) =>
-          i.id === item.id ? { ...i, quantity: i.quantity + quantity } : i
+  const addToCart = (meal) => {
+    setCartItems((prev) => {
+      const existing = prev.find((item) => item.id === meal.id);
+      if (existing) {
+        return prev.map((item) =>
+          item.id === meal.id ? { ...item, quantity: item.quantity + 1 } : item
         );
       }
-      return [...prevCart, { ...item, quantity }];
+      return [...prev, { ...meal, quantity: 1 }];
     });
   };
 
-  const removeFromCart = (id) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+  const removeItem = (id) => {
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const updateQuantity = (id, quantity) => {
-    if (quantity < 1) return;
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === id ? { ...item, quantity } : item
-      )
-    );
-  };
+  const clearCart = () => setCartItems([]);
 
-  const clearCart = () => {
-    setCart([]);
-  };
+  const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
-  const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
-  const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
+  // Total quantity for the badge
+  const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
   return (
     <CartContext.Provider
-      value={{
-        cart,
-        addToCart,
-        removeFromCart,
-        updateQuantity,
-        clearCart,
-        cartTotal,
-        cartCount,
-      }}
+      value={{ cartItems, addToCart, removeItem, clearCart, totalPrice, totalQuantity }}
     >
       {children}
     </CartContext.Provider>
   );
 };
+
+export const useCart = () => useContext(CartContext);
