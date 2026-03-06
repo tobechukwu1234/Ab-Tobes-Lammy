@@ -18,10 +18,7 @@ const contactSchema = z.object({
 
 const Contact = () => {
   const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    reset,
+    register, handleSubmit, formState: { errors, isSubmitting }, reset,
   } = useForm({
     resolver: zodResolver(contactSchema),
   });
